@@ -1,20 +1,19 @@
-# frozen_string_literal: true
-
-require 'capybara/cucumber'
+require 'cucumber'
+require 'capybara'
+require 'capybara/dsl'
+require 'rspec'
 require 'selenium-webdriver'
-require 'bundler/setup'
-require 'rubygems'
-require 'webdrivers'
 
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app,
-                                 :browser => :chrome,
-                                 :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.chrome(
-                                   'chromeOptions' => {
-                                     'args' => [ "--window-size=1920,1080" ]
-                                   }
-                                 )
-  )
+include Capybara::DSL
+include RSpec::Matchers
+
+RSpec.configure do |config|
+  config.include Capybara::DSL, type: :feature
 end
 
-Capybara.default_driver = :chrome
+Capybara.configure do |config|
+  config.app_host = 'https://regression-www.beinconnect.com.tr'
+  config.default_selector = :css
+  config.default_max_wait_time = 10
+  config.default_driver = :selenium
+end

@@ -1,7 +1,7 @@
-source 'https://rubygems.org'
-
+source 'https://rubygems.org' do
 gem 'cucumber'
-gem 'selenium-webdriver'
 gem 'capybara', '~>3.30'
-gem 'selenium-webdriver'
-gem 'webdrivers'
+gem 'rspec', '~>3.9'
+gem 'selenium-webdriver', '~>3.142', '>= 3.142.7'
+gem 'syntax', '~>1.2'
+end
